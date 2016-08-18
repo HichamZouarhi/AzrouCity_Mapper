@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AC Mapper</title>
+		<link rel="stylesheet" href="css/app.css">
+
+    <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+    <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
+    <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+
+    <!-- Recommended location for your JavaScript libraries -->
+    <!-- These library references (below) are just examples to give you the general idea... -->
+    <!-- <script src="lib/mc/hammer.js"></script> -->
+    <!-- <script src="lib/ft/fastclick.js"></script> -->
+
+		<!--
+  	* cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
+  	* Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
+  	* The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
+  	* You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
+		-->
+    <script src="cordova.js" id="xdkJScordova_"></script>
+
+    <script src="js/app.js"></script>           <!-- for your event code, see README and file comments for details -->
+    <script src="js/init-app.js"></script>      <!-- for your init code, see README and file comments for details -->
+    <script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see file for details -->
+	
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="css/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+		<link href="css/ol.css" rel="stylesheet" type="text/css">
+		<link href="css/ol3-popup.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+    	html, body {
+    		height: 100%;
+    		margin: 0;
+				
+    	}
+
+    	#map {
+				width: 100%;
+				height: 100%;
+    		margin: 0;
+    		
+    	}
+			.btn-circle{
+				position: absolute;
+				bottom: 15px;
+				z-index: 2;
+			}
+    </style>
+
+	</head>
+
+	<body>
+
+    <div id="map" class="map">
+      <!-- Navigation -->
+      <nav class="navbar navbar-default navbar-static-top" role="navigation" style="position: absolute">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            	<span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="index.html"> AC Mapper</a>
+          </div>
+            <!-- /.navbar-header -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bank fa-fw"></i> Banks</a>
+                        </li>
+												<li>
+                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Hotels</a>
+                        </li>
+												<li>
+                            <a href="#"><i class="fa fa-cutlery fa-fw"></i> Food/Drinks</a>
+                        </li>
+												<li>
+                            <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Shops</a>
+                        </li>
+												<li>
+                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Souks/Bazars</a>
+                        </li>
+												<li>
+                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Art</a>
+                        </li>
+												<li>
+                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Historic Sites</a>
+                        </li>
+												<li>
+                            <a href="#"><i class="fa fa-plus-square fa-fw"></i> Emergencies</a>
+                        </li>
+												<li>
+                            <a href="#"><i class="fa fa-briefcase fa-fw"></i> Public Administrations</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+			<button id="geolocateMe" type="button" class="btn btn-info btn-circle btn-lg" style="left: 10px"><i class="fa fa-location-arrow"></i></button>
+    	<button id="surpriseMe" type="button" class="btn btn-warning btn-circle btn-lg" style="left: 45%"><i class="fa fa-info"></i></button>
+    	<button id="openSearch" type="button" class="btn btn-danger btn-circle btn-lg" style="right: 10px"><i class="fa fa-search"></i></button>
+    </div>
+		
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+		
+		<!-- Openlayers 3 Javascript -->
+		<script src="js/ol.js"></script>
+		<script src="js/ol3-popup.js"></script>
+		<script src="js/map.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="js/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+
+	</body>
+
+</html>
