@@ -44,6 +44,9 @@
 
     <!-- Custom Fonts -->
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		
+		<!-- bootstrap slider -->
+		<link href="css/bootstrap-slider.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -110,7 +113,7 @@
                             <a href="#"><i class="fa fa-bank fa-fw"></i> Banks</a>
                         </li>
 												<li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Hotels</a>
+                            <a href="#"><i class="fa fa-home fa-fw"></i> Hotels</a>
                         </li>
 												<li>
                             <a href="#"><i class="fa fa-cutlery fa-fw"></i> Food/Drinks</a>
@@ -119,13 +122,13 @@
                             <a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Shops</a>
                         </li>
 												<li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Souks/Bazars</a>
+                            <a href="#"><i class="fa fa-group fa-fw"></i> Souks/Bazars</a>
                         </li>
 												<li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Art</a>
+                            <a href="#"><i class="fa fa-music fa-fw"></i> Art</a>
                         </li>
 												<li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Historic Sites</a>
+                            <a href="#"><i class="fa fa-camera fa-fw"></i> Historic Sites</a>
                         </li>
 												<li>
                             <a href="#"><i class="fa fa-plus-square fa-fw"></i> Emergencies</a>
@@ -141,11 +144,48 @@
         </nav>
 			<button id="geolocateMe" type="button" class="btn btn-info btn-circle btn-lg" style="left: 10px"><i class="fa fa-location-arrow"></i></button>
     	<button id="surpriseMe" type="button" class="btn btn-warning btn-circle btn-lg" style="left: 45%"><i class="fa fa-info"></i></button>
-    	<button id="openSearch" type="button" class="btn btn-danger btn-circle btn-lg" style="right: 10px"><i class="fa fa-search"></i></button>
+    	<button id="openSearch" type="button" class="btn btn-danger btn-circle btn-lg" style="right: 10px" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i></button>
     </div>
+		<!-- Map -->
 		
-    <!-- /#wrapper -->
-
+		<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="searchModalLabel">refine your search</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<form role="form">
+									<div class="form-group">
+										<label>Tag</label>
+										<input class="form-control" id="tag" type="text">
+									</div>
+									<div class="form-group">
+										<label>Address</label>
+										<input class="form-control" id="address" type="text">
+									</div>
+									<div class="form-group">
+										<label>Distance</label>
+										<input id="distance" data-slider-id='distanceSlider' type="text" data-slider-min="0" data-slider-max="3000" data-slider-step="10" data-slider-value="50"/>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button id="search" type="button" class="btn btn-primary">Search</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- Search Modal -->
+		
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
 		
@@ -162,6 +202,22 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/sb-admin-2.js"></script>
+		
+		<!-- UI components (slider) -->
+		<script src="js/bootstrap-slider.min.js"></script>
+		<style>
+			#distanceSlider .slider-selection {
+				background: #BABABA;
+			}
+		</style>
+		<script>
+			$('#distance').slider({
+				formatter: function(value) {
+					return value + ' m ';
+				}
+			});
+
+		</script>
 
 	</body>
 
