@@ -168,8 +168,23 @@
 										<input class="form-control" id="address" type="text">
 									</div>
 									<div class="form-group">
+										<label>Category</label>
+										<select id="categorySelect" class="form-control">
+											<option value="">- Category -</option>
+											<option value="bank">Banks</option>
+											<option value="hotel">Hotels</option>
+											<option value="food">Food/Drinks</option>
+											<option value="shop">Shops</option>
+											<option value="art">Art</option>
+											<option value="historicSite">Historic Sites</option>
+											<option value="souk">Souks/Bazars</option>
+											<option value="emergency">Emergencies</option>
+											<option value="publicAdmin">Public Administrations</option>
+										</select>
+									</div>
+									<div class="form-group">
 										<label>Distance</label>
-										<input id="distance" data-slider-id='distanceSlider' type="text" data-slider-min="0" data-slider-max="3000" data-slider-step="10" data-slider-value="50"/>
+										<input id="distance" data-slider-id='distanceSlider' type="text" data-slider-min="10" data-slider-max="1000" data-slider-step="10" data-slider-value="100"/>
 									</div>
 								</form>
 							</div>

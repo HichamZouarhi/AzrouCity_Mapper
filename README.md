@@ -23,6 +23,9 @@ Features done so far :
 			- CIH : 1
 			- Crédit Agricole : 1
 			- Crédit du maroc : 1
+		- Hotels :
+			- Cedres - Panorama - el fath - lion de l'atlas 
+			- 
 
 Copyright © 2012-2015, Intel Corporation. All rights reserved.
 
