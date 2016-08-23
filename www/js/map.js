@@ -16,7 +16,12 @@ var map= new ol.Map({
 
 $('#geolocateMe').click(function(){
 	var geolocation = new ol.Geolocation({
-		projection: 'EPSG:4326'
+		projection: 'EPSG:4326',
+		trackingOptions: {
+			maximumAge: 10000,
+			enableHighAccuracy: true,
+			timeout: 600000
+		}
 	});
 	geolocation.setTracking(true);
 
@@ -60,6 +65,19 @@ $('#geolocateMe').click(function(){
 
 // vector layers containing data from the geojson files
 var layers = new Object();
+var sources = new Object();
+
+sources['bank']= new ol.source.Vector({
+	format: new ol.format.GeoJSON(),
+	projection: 'EPSG:4326',
+	url: 'maps/banks.geojson'
+});
+
+sources['hotel']= new ol.source.Vector({
+	format: new ol.format.GeoJSON(),
+	projection: 'EPSG:4326',
+	url: 'maps/hotels.geojson'
+});
 
 var clusterSourceBank = new ol.source.Cluster({
 	distance: 40,

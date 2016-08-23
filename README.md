@@ -13,6 +13,8 @@ Features done so far :
 
 	- UI Design ( still need to add the icons for markers on the map)
 	- Geolocation ( position and accuracy )
+	- Vector layer with features clustering 
+	- Vector layer toggle from menu
 	- Gathering Data :
 		- Banks :
 			- Attijari WafaBank : 1
@@ -23,10 +25,5 @@ Features done so far :
 			- CIH : 1
 			- Crédit Agricole : 1
 			- Crédit du maroc : 1
-		- Hotels :
-			- Cedres - Panorama - el fath - lion de l'atlas 
-			- 
-
-Copyright © 2012-2015, Intel Corporation. All rights reserved.
-
-See [LICENSE.md](<LICENSE.md>) for license terms and conditions.
+		- Hotels : 10
+		- emergency :
