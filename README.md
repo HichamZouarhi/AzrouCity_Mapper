@@ -16,14 +16,7 @@ Features done so far :
 	- Vector layer with features clustering 
 	- Vector layer toggle from menu
 	- Gathering Data :
-		- Banks :
-			- Attijari WafaBank : 1
-			- BMCE : 2
-			- Banque Populaire : 2
-			- La poste : 2
-			- BMCI : 1
-			- CIH : 1
-			- Crédit Agricole : 1
-			- Crédit du maroc : 1
-		- Hotels : 10
-		- emergency :
+		+ Banks : 12
+		+ Hotels : 10
+		+ emergency : 6
+	- 

@@ -100,9 +100,9 @@
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" id="nameSearch" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button id="quickSearch" class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -200,6 +200,33 @@
 			<!-- /.modal-dialog -->
 		</div>
 		<!-- Search Modal -->
+		
+		
+		<!-- display Modal : click on a feature -->
+		<div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="displayModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="displayModalLabel">name</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button id="getHere" type="button" class="btn btn-primary">Get Here ?</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- Display Modal -->
 		
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
