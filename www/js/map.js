@@ -97,7 +97,6 @@ var styleCache = {};
 layers['bank'] = new ol.layer.Vector({
 	title: 'bank',
 	source: clusterSourceBank,
-	visible: false,
 	style: function(feature) {
 		var size = feature.get('features').length;
 		var style = styleCache[size];
@@ -139,7 +138,6 @@ layers['bank'] = new ol.layer.Vector({
 layers['hotel'] = new ol.layer.Vector({
 	title: 'hotel',
 	source: clusterSourceHotel,
-	visible: false,
 	style: function(feature) {
 		var size = feature.get('features').length;
 		var style = styleCache[size];
@@ -195,6 +193,11 @@ var tmpLayer= new ol.layer.Vector({
 map.addLayer(tmpLayer);
 map.addLayer(layers['bank']);
 map.addLayer(layers['hotel']);
+
+for( var layer in layers){
+	layers[layer].setVisible(false);
+}
+layers['hotel'].setVisible(true);
 // data ends here
 //------------------------------------------------
 // layer toggle using the bootstrap menu
@@ -214,22 +217,17 @@ $(".selectCategory").click(function(){
 
 $('#quickSearch').click(function(){
 	var name=$('#nameSearch').val();
+	/*for (var layer in layers){
+		layers[layer].setSource(sources[layer]);
+		console.log("new source attributed "+layers[layer].getSource().getUrl());
+	}*/
 	for ( var layer in layers){
-		console.log("layer : "+layer+" visibile : "+layers[layer].getVisible());
+		//console.log("layer : "+layer+" visibile : "+layers[layer].getVisible());
 		layers[layer].setVisible(true);
-		console.log("layer : "+layer+" visibile : "+layers[layer].getVisible());
-		layers[layer].getSource().getSource().changed();
-		//console.log(layer+" "+JSON.stringify(layers[layer].getSource().getSource().getFeatures()));
-		var src=layers[layer].getSource().getSource();
-		console.log(src.getState()+" nbr of features : "+src.getFeatures().length);
-		src.forEachFeature(function(feature){
-					console.log('feature : '+feature.get('id'));
-					if(feature.get('name').search(name)!=-1){
-						console.log('found one');
-						tmpLayer.getSource().addFeature(feature);
-					}
-				});
-		/*layers[layer].getSource().getSource().on('change', function(evt){
+		//console.log("layer : "+layer+" visibile : "+layers[layer].getVisible());
+		layers[layer].getSource().changed();
+		
+		layers[layer].getSource().on('change', function(evt){
 			var src= evt.target;
 			//console.log(src.getState());
 			if(src.getState()=='ready'){
@@ -242,7 +240,8 @@ $('#quickSearch').click(function(){
 					}
 				});
 			}
-		});*/
+		});
+		layers[layer].setVisible(false);
 	}
 	tmpLayer.setVisible(true);
 	for( var layer in layers){
@@ -254,16 +253,34 @@ $('#quickSearch').click(function(){
 //--------------------------------------------------
 //displayModal when a feature is selected
 //code begins here
+/*function isCluster(feature) {
+  if (!feature.get('features')) { 
+        return false; 
+  }
+  return feature.get('features').length > 1;
+}*/
+
 map.on('singleclick', function(evt){
 	var feature=map.forEachFeatureAtPixel(evt.pixel, function(feature, layer){
 		if(layer!=myPosition){
+			//console.log(feature.get('name'));
 			return feature;
 		}
 	});
+	/*if (isCluster(feature)) {
+		// is a cluster, so loop through all the underlying features
+		var features = feature.get('features');
+		for(var i = 0; i < features.length; i++) {
+			// here you'll have access to your normal attributes:
+			console.log(features[i].get('name'));
+    }
+	}*/
 	
-	if(feature){
+	if(feature && feature.get('features').length==1){
 		//console.log(JSON.stringify(feature));
-		$('#displayModalLabel').text(feature.get('name'));
+		console.log(feature.get('features')[0].get('name'));
+		
+		$('#displayModalLabel').text(feature.get('features')[0].get('name'));
 		$('#displayModal').modal('show');
 	}
 });
