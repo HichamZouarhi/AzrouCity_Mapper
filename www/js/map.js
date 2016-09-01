@@ -206,6 +206,7 @@ $(".selectCategory").click(function(){
 	for( var layer in layers){
 		layers[layer].setVisible(false);
 	}
+	tmpLayer.setVisible(false);
 	if(layers[this.id]){
 		layers[this.id].setVisible(true);
 	}
@@ -216,32 +217,21 @@ $(".selectCategory").click(function(){
 // code begins here
 
 $('#quickSearch').click(function(){
-	var name=$('#nameSearch').val();
-	/*for (var layer in layers){
-		layers[layer].setSource(sources[layer]);
-		console.log("new source attributed "+layers[layer].getSource().getUrl());
-	}*/
-	for ( var layer in layers){
-		//console.log("layer : "+layer+" visibile : "+layers[layer].getVisible());
+	var name=$('#nameSearch').val(); // getting the searched name
+	tmpLayer.getSource().clear();
+	for(var layer in layers){
+		layers[layer].setVisible(false);
+	}
+	for ( var layer in sources){
 		layers[layer].setVisible(true);
-		//console.log("layer : "+layer+" visibile : "+layers[layer].getVisible());
-		layers[layer].getSource().changed();
-		
-		layers[layer].getSource().on('change', function(evt){
-			var src= evt.target;
-			//console.log(src.getState());
-			if(src.getState()=='ready'){
-				//console.log('source is ready '+src.getUrl());
-				src.forEachFeature(function(feature){
-					console.log('feature : '+feature.get('id'));
+		console.log(layer+ " state : " + sources[layer].getState());
+		sources[layer].getFeatures().forEach(function(feature){
+			console.log('feature : '+feature.get('name')+' in layer : '+sources[layer].getUrl());
 					if(feature.get('name').search(name)!=-1){
 						console.log('found one');
 						tmpLayer.getSource().addFeature(feature);
 					}
 				});
-			}
-		});
-		layers[layer].setVisible(false);
 	}
 	tmpLayer.setVisible(true);
 	for( var layer in layers){
@@ -253,34 +243,30 @@ $('#quickSearch').click(function(){
 //--------------------------------------------------
 //displayModal when a feature is selected
 //code begins here
-/*function isCluster(feature) {
-  if (!feature.get('features')) { 
-        return false; 
-  }
-  return feature.get('features').length > 1;
-}*/
 
 map.on('singleclick', function(evt){
+	var searched;
 	var feature=map.forEachFeatureAtPixel(evt.pixel, function(feature, layer){
-		if(layer!=myPosition){
+		if(layer!=myPosition && layer!=tmpLayer){
 			//console.log(feature.get('name'));
 			return feature;
 		}
+		if(layer==tmpLayer){
+			searched=true;
+			return feature;
+		}
 	});
-	/*if (isCluster(feature)) {
-		// is a cluster, so loop through all the underlying features
-		var features = feature.get('features');
-		for(var i = 0; i < features.length; i++) {
-			// here you'll have access to your normal attributes:
-			console.log(features[i].get('name'));
-    }
-	}*/
 	
-	if(feature && feature.get('features').length==1){
-		//console.log(JSON.stringify(feature));
-		console.log(feature.get('features')[0].get('name'));
-		
-		$('#displayModalLabel').text(feature.get('features')[0].get('name'));
+	if(feature && !searched){
+		if(feature.get('features').length==1){
+			//console.log(JSON.stringify(feature));
+			//console.log(feature.get('features')[0].get('name'));
+			$('#displayModalLabel').text(feature.get('features')[0].get('name'));
+			$('#displayModal').modal('show');	
+		}
+	}
+	if(feature && searched){
+		$('#displayModalLabel').text(feature.get('name'));
 		$('#displayModal').modal('show');
 	}
 });
