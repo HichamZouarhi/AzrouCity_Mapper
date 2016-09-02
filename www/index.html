@@ -100,7 +100,7 @@
 					<ul class="nav" id="side-menu">
 						<li class="sidebar-search">
 							<div class="input-group custom-search-form">
-								<input type="text" id="nameSearch" class="form-control" placeholder="Search...">
+								<input type="text" id="nameSearch" class="form-control" placeholder="Search ..." data-toggle="tooltip" data-placement="bottom" title="Please select a category before searching">
 								<span class="input-group-btn">
 								<button id="quickSearch" class="btn btn-default" type="button">
 									<i class="fa fa-search"></i>
@@ -283,6 +283,8 @@
 					return value + ' m ';
 				}
 			});
+			
+			$('[data-toggle="tooltip"]').tooltip();
 
 		</script>
 
